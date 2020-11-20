@@ -1,0 +1,114 @@
+package dev.com;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        Fraction frac = new Fraction();
+        boolean isContinue = true;
+        while (isContinue) {
+            System.out.println("Enter numerator: ");
+            frac.setNum(input.nextInt());
+            System.out.println("Enter denominator: ");
+            frac.setDen(input.nextInt());
+
+            System.out.println("***************OUTPUT***************");
+            System.out.println("NUMERATOR: " + frac.getNum());
+            System.out.println("DENOMINATOR: " + frac.getDen());
+            System.out.println("FRACTION: " + frac.getShowFractionForm());
+            System.out.println("LOWEST TERM: " + frac.getDetermineLowestTerm());
+            System.out.println("DECIMAL EQUIVALENT: " + frac.getDetermineDecimalEquivalent());
+            System.out.println("FRACTION TYPE: " + frac.getDetermineFractionType());
+            System.out.println("Input again? [y/n]");
+            String result = input.next();
+            isContinue = result.equals("y");
+        }
+    }
+
+        public static class Fraction {
+
+            private int num, den;
+            private String showFractionForm;
+            private String determineFractionType;
+            private String determineLowestTerm;
+            private double determineDecimalEquivalent;
+
+
+//accessors
+
+
+            public String getShowFractionForm() {
+
+                String num1 = Integer.toString(num);
+                String den1 = Integer.toString(den);
+                showFractionForm = num + "/" + den;
+                return showFractionForm;
+            }
+
+            public String getDetermineFractionType() {
+                if (num % den == 0) {
+                    determineFractionType = ("WHOLE NUMBER");
+                } else if (num < den) {
+                    determineFractionType = ("PROPER FRACTION");
+                } else if (num > den) {
+                    determineFractionType = ("IMPROPER FRACTION");
+                }
+                return determineFractionType;
+            }
+
+            public String getDetermineLowestTerm() {
+                int smaller = num < den ? num : den;
+                int HCF = -1;
+                for (int i = smaller; i > 0; --i) {
+                    if (num % i == 0 && den % i == 0) {
+                        HCF = i;
+                        determineLowestTerm = (num / HCF + "/" + den / HCF);
+                        break;
+                    }
+                }
+                return determineLowestTerm;
+            }
+
+            public double getDetermineDecimalEquivalent() {
+                determineDecimalEquivalent = (double) num / den;
+                return determineDecimalEquivalent;
+            }
+
+            public int getNum() {
+                return num;
+            }
+
+            public int getDen() {
+                return den;
+            }
+
+
+//mutators
+
+            public void ShowFractionForm(String form) {
+                this.showFractionForm = form;
+            }
+
+            public void setDetermineFractionType(String type) {
+                this.determineFractionType = type;
+            }
+
+            public void setDetermineLowestTerm(String term) {
+                this.determineLowestTerm = term;
+            }
+
+            public void setDetermineDecimalEquivalent(int decimal) {
+                this.determineDecimalEquivalent = decimal;
+            }
+
+            public void setNum(int num) {
+                this.num = num;
+            }
+
+            public void setDen(int den) {
+                this.den = den;
+            }
+
+        }
+    }
